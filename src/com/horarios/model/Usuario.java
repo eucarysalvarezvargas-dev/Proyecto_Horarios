@@ -86,5 +86,25 @@ public class Usuario {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
+
+    /** Nombre completo para la interfaz; si no hay nombres, usa el username. */
+    public String getNombreParaMostrar() {
+        String nom = nombres != null ? nombres.trim() : "";
+        String ape = apellidos != null ? apellidos.trim() : "";
+        String completo = (nom + " " + ape).trim();
+        if (!completo.isEmpty()) {
+            return completo;
+        }
+        return username != null ? username.trim() : "";
+    }
+
+    /** Texto de sesión: «Usuario: Nombre Apellido (ROL)». */
+    public String getEtiquetaSesion() {
+        if (rol == null || rol.trim().isEmpty()) {
+            String nombre = getNombreParaMostrar();
+            return nombre.isEmpty() ? "Usuario: (no definido)" : "Usuario: " + nombre;
+        }
+        return "Usuario: " + getNombreParaMostrar() + " (" + rol + ")";
+    }
 }
 

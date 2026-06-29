@@ -291,7 +291,7 @@ public class MainFrame extends JFrame {
         if (usuarioActual == null) {
             return "";
         }
-        return "Usuario: " + usuarioActual.getUsername() + " (" + usuarioActual.getRol() + ")";
+        return usuarioActual.getEtiquetaSesion();
     }
 
     private void onPerfilActualizado(Usuario actualizado) {
@@ -301,6 +301,9 @@ public class MainFrame extends JFrame {
         }
         configurarAuditoriaControladores();
         perfilPanel.setUsuarioSesion(actualizado);
+        if (inicioPanel != null) {
+            inicioPanel.setUsuarioSesion(actualizado);
+        }
     }
 
     private void cerrarSesion() {

@@ -31,9 +31,10 @@ public class InicioPanel extends JPanel {
     private final AulaController aulaController;
     private final UsuarioController usuarioController;
     private final HorarioController horarioController;
-    private final Usuario usuarioActual;
+    private Usuario usuarioActual;
 
     private final JLabel lblFechaHora;
+    private final JLabel lblUsuario;
     private final JLabel lblDocentesValor;
     private final JLabel lblAsignaturasValor;
     private final JLabel lblAulasValor;
@@ -75,11 +76,8 @@ public class InicioPanel extends JPanel {
         JLabel lblTitulo = new JLabel("Dashboard Principal", SwingConstants.LEFT);
         lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 26));
 
-        String usuarioTxt = "Usuario: (no definido)";
-        if (usuarioActual != null) {
-            usuarioTxt = "Usuario: " + usuarioActual.getUsername() + " (" + usuarioActual.getRol() + ")";
-        }
-        JLabel lblUsuario = new JLabel(usuarioTxt, SwingConstants.LEFT);
+        String usuarioTxt = usuarioActual != null ? usuarioActual.getEtiquetaSesion() : "Usuario: (no definido)";
+        lblUsuario = new JLabel(usuarioTxt, SwingConstants.LEFT);
         lblUsuario.setFont(new Font("SansSerif", Font.PLAIN, 13));
 
         lblFechaHora = new JLabel("", SwingConstants.RIGHT);
@@ -256,6 +254,13 @@ public class InicioPanel extends JPanel {
 
     public void setOnAbrirReportesPdf(Runnable onAbrirReportesPdf) {
         this.onAbrirReportesPdf = onAbrirReportesPdf;
+    }
+
+    public void setUsuarioSesion(Usuario usuario) {
+        this.usuarioActual = usuario;
+        if (lblUsuario != null) {
+            lblUsuario.setText(usuario != null ? usuario.getEtiquetaSesion() : "Usuario: (no definido)");
+        }
     }
 
     public final void refrescar() {
