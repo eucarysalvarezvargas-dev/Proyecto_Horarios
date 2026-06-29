@@ -1,0 +1,22 @@
+JasperReports + MySQL (PDF y JDBC)
+
+1. Descargar JARs (recomendado):
+   PowerShell:
+     cd lib
+     .\descargar_dependencias.ps1
+
+2. NetBeans: Propiedades del proyecto > Libraries > Add JAR/Folder
+   Seleccione TODOS los .jar de esta carpeta lib/ (jasperreports, commons-*, jfreechart, mysql-connector-j, etc.)
+
+3. Plantillas: carpeta reports/ (tamaño carta / Letter, vertical)
+   - horario_docente.jrxml  (detalle por franja)
+   - reporte_resumen.jrxml  (totales por módulo)
+
+4. En la app: módulo Horarios > botón "Reportes PDF"
+   Tipos: General, Semanal (7 días), Quincenal (15), Mensual (30) según fecha_registro del horario.
+
+5. Si falta algún JAR, ReporteService ofrece CSV como respaldo.
+
+Troubleshooting:
+- ClassNotFoundException net.sf.jasperreports... → agregar jasperreports-6.21.0.jar y dependencias del script.
+- NoSuchMethodError → versiones mezcladas; borre JARs viejos y vuelva a ejecutar descargar_dependencias.ps1.

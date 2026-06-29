@@ -1,0 +1,11 @@
+Coloque aquí los JAR externos del proyecto.
+
+OBLIGATORIO para MySQL (si usan base de datos):
+  mysql-connector-j-8.x.x.jar
+  Descarga: https://dev.mysql.com/downloads/connector/j/
+
+OPCIONAL para PDF con JasperReports:
+  Ver LEEME_JASPER.txt
+
+Después de copiar el JAR de MySQL, agréguelo en NetBeans:
+  Propiedades del proyecto → Libraries → Add JAR/Folder → elegir este archivo.

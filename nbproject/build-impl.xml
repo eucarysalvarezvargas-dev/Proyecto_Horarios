@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Este archivo es un build-impl mínimo para permitir abrir/compilar/ejecutar
+en NetBeans con un proyecto Ant. NetBeans puede regenerar/expandir este
+archivo si se usa el asistente de proyecto.
+-->
+<project xmlns:if="ant:if" xmlns:unless="ant:unless" basedir=".." default="default" name="Proyecto_Horarios-impl">
+
+    <property file="nbproject/project.properties"/>
+    <property file="nbproject/private/private.properties"/>
+
+    <property name="build.classes.dir" value="${build.classes.dir}"/>
+
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}"
+               destdir="${build.classes.dir}"
+               includeantruntime="false"
+               encoding="${source.encoding}"
+               source="${javac.source}"
+               target="${javac.target}">
+            <classpath>
+                <pathelement path="${javac.classpath}"/>
+            </classpath>
+        </javac>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" excludes="**/*.java"/>
+        </copy>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${dist.jar}" manifest="${manifest.file}">
+            <fileset dir="${build.classes.dir}"/>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java classname="${main.class}" fork="true" failonerror="true">
+            <classpath>
+                <pathelement path="${run.classpath}"/>
+                <pathelement location="${dist.jar}"/>
+            </classpath>
+            <jvmarg line="${run.jvmargs}"/>
+        </java>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="default" depends="jar"/>
+</project>
+

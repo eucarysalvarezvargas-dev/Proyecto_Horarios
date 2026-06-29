@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              name="reporte_resumen" pageWidth="612" pageHeight="792"
+              columnWidth="572" leftMargin="20" rightMargin="20" topMargin="15" bottomMargin="15"
+              whenNoDataType="AllSectionsNoDetail">
+    <style name="CeldaBorde" mode="Opaque">
+        <box><pen lineWidth="0.5"/></box>
+    </style>
+    <style name="EncabezadoTabla" style="CeldaBorde" mode="Opaque" backcolor="#ECEFF1"/>
+    <style name="FilaDetalle" style="CeldaBorde" mode="Opaque" backcolor="#FFFFFF"/>
+    <style name="FilaTotal" style="CeldaBorde" mode="Opaque" backcolor="#F5F5F5"/>
+    <parameter name="TITULO" class="java.lang.String"/>
+    <parameter name="FECHA_GENERACION" class="java.lang.String"/>
+    <field name="modulo" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Integer"/>
+    <variable name="TOTAL_ACTIVOS" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
+    </variable>
+    <background>
+        <band height="762">
+            <staticText>
+                <reportElement x="0" y="220" width="28" height="260" forecolor="#D5DCE8"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+                    <font fontName="Times New Roman" size="22" isBold="true"/>
+                </textElement>
+                <text><![CDATA[UNEFA]]></text>
+            </staticText>
+        </band>
+    </background>
+    <title>
+        <band height="72">
+            <staticText>
+                <reportElement x="0" y="0" width="572" height="26"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[UNEFA — Sistema de Gestión de Horarios Docentes]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="28" width="572" height="18"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO} != null ? $P{TITULO} : "Resumen general — UNEFA"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="48" width="572" height="12"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Times New Roman" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generado: " + ($P{FECHA_GENERACION} != null ? $P{FECHA_GENERACION} : "")]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="60" width="572" height="12"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Times New Roman" size="8" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Registros activos por módulo del sistema]]></text>
+            </staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="22">
+            <staticText>
+                <reportElement style="EncabezadoTabla" x="0" y="0" width="330" height="22"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MÓDULO]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoTabla" x="330" y="0" width="242" height="22"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CANTIDAD ACTIVOS]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement style="FilaDetalle" x="0" y="0" width="330" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{modulo}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="FilaDetalle" x="330" y="0" width="242" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <summary>
+        <band height="24">
+            <staticText>
+                <reportElement style="FilaTotal" x="0" y="0" width="330" height="22"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total registros listados]]></text>
+            </staticText>
+            <textField>
+                <reportElement style="FilaTotal" x="330" y="0" width="242" height="22"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{TOTAL_ACTIVOS}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>

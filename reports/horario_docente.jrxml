@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              name="horario_docente" pageWidth="612" pageHeight="792"
+              columnWidth="572" leftMargin="20" rightMargin="20" topMargin="15" bottomMargin="15"
+              whenNoDataType="AllSectionsNoDetail">
+    <style name="CeldaBorde" mode="Opaque">
+        <box><pen lineWidth="0.5"/></box>
+    </style>
+    <style name="EncabezadoGrilla" style="CeldaBorde" mode="Opaque" backcolor="#ECEFF1"/>
+    <style name="CeldaHora" style="CeldaBorde" mode="Opaque" backcolor="#FAFAFA"/>
+    <style name="CeldaDia" style="CeldaBorde" mode="Opaque" backcolor="#FFFFFF"/>
+    <parameter name="TITULO" class="java.lang.String"/>
+    <parameter name="SUBTITULO" class="java.lang.String"/>
+    <parameter name="FECHA_GENERACION" class="java.lang.String"/>
+    <parameter name="LISTA_LEYENDA" class="java.util.List"/>
+    <parameter name="SUBREPORT_LEYENDA" class="net.sf.jasperreports.engine.JasperReport"/>
+    <field name="entSal" class="java.lang.String"/>
+    <field name="lun" class="java.lang.String"/>
+    <field name="mar" class="java.lang.String"/>
+    <field name="mie" class="java.lang.String"/>
+    <field name="jue" class="java.lang.String"/>
+    <field name="vie" class="java.lang.String"/>
+    <field name="sab" class="java.lang.String"/>
+    <field name="dom" class="java.lang.String"/>
+    <background>
+        <band height="762">
+            <staticText>
+                <reportElement x="0" y="200" width="28" height="280" forecolor="#D5DCE8"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle" rotation="Left">
+                    <font fontName="Times New Roman" size="22" isBold="true"/>
+                </textElement>
+                <text><![CDATA[UNEFA]]></text>
+            </staticText>
+        </band>
+    </background>
+    <title>
+        <band height="125">
+            <staticText>
+                <reportElement x="0" y="0" width="572" height="26"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[UNEFA — Sistema de Gestión de Horarios Docentes]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="26" width="572" height="16"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Times New Roman" size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TITULO} != null ? $P{TITULO} : "Reporte de horarios"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="42" width="572" height="12"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Times New Roman" size="8" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{SUBTITULO}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="54" width="572" height="10"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Times New Roman" size="7"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Generado: " + ($P{FECHA_GENERACION} != null ? $P{FECHA_GENERACION} : "")]]></textFieldExpression>
+            </textField>
+            <subreport>
+                <reportElement x="0" y="66" width="572" height="40" positionType="Float" stretchType="RelativeToTallestObject"/>
+                <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{LISTA_LEYENDA})]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{SUBREPORT_LEYENDA}]]></subreportExpression>
+            </subreport>
+            <staticText>
+                <reportElement x="0" y="110" width="572" height="14" positionType="Float"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[HORARIO DE CLASES]]></text>
+            </staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="20">
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="0" y="0" width="72" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ENT / SAL]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="72" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[LUN]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="143" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MAR]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="214" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MIE]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="285" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[JUE]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="356" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[VIE]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="427" y="0" width="71" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[SAB]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="EncabezadoGrilla" x="498" y="0" width="74" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="7" isBold="true"/>
+                </textElement>
+                <text><![CDATA[DOM]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16">
+            <textField>
+                <reportElement style="CeldaHora" x="0" y="0" width="72" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{entSal}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="72" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{lun}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="143" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{mar}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="214" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{mie}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="285" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{jue}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="356" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{vie}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="427" y="0" width="71" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{sab}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement style="CeldaDia" x="498" y="0" width="74" height="16"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Times New Roman" size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dom}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

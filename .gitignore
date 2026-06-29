@@ -1,0 +1,16 @@
+dist/
+build/
+nbproject/private/
+*.class
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+
+RESTRICCIONES ESTRICTAS DEL PROYECTO Y DIRECTRICES DE INGENIERÍA .md
+MANUAL_USUARIO.md
+docs/CHECKLIST_PRUEBAS.md
+DiagramasUML/
