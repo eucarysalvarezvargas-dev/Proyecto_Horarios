@@ -41,6 +41,9 @@ public class MainFrame extends JFrame {
     private final JPanel panelContenido;
     private final CardLayout cardLayout;
     private InicioPanel inicioPanel;
+    private final DocentePanel docentePanel;
+    private final AsignaturaPanel asignaturaPanel;
+    private final AulaPanel aulaPanel;
     private final DocenteController docenteController;
     private final AsignaturaController asignaturaController;
     private final AulaController aulaController;
@@ -178,9 +181,10 @@ public class MainFrame extends JFrame {
         docenteController.reconciliarVinculos();
         configurarAuditoriaControladores();
 
-        panelContenido.add(new DocentePanel(docenteController, usuarioActual), CARD_DOCENTES);
-        panelContenido.add(new AsignaturaPanel(asignaturaController, usuarioActual), CARD_ASIGNATURAS);
-        panelContenido.add(new AulaPanel(aulaController, usuarioActual), CARD_AULAS);
+        panelContenido.add(this.docentePanel = new DocentePanel(docenteController, usuarioActual), CARD_DOCENTES);
+        this.docentePanel.setOnDatosCambiados(this::refrescarTrasCambioDocentes);
+        panelContenido.add(this.asignaturaPanel = new AsignaturaPanel(asignaturaController, usuarioActual), CARD_ASIGNATURAS);
+        panelContenido.add(this.aulaPanel = new AulaPanel(aulaController, usuarioActual), CARD_AULAS);
         this.usuarioPanel = new UsuarioPanel(this.usuarioController, docenteController, usuarioActual);
         panelContenido.add(this.usuarioPanel, CARD_USUARIOS);
         this.horarioPanel = new HorarioPanel(horarioController, docenteController, asignaturaController, aulaController,
@@ -272,6 +276,18 @@ public class MainFrame extends JFrame {
     }
 
     private void mostrarCard(String nombreCard) {
+        if (CARD_INICIO.equals(nombreCard) && inicioPanel != null) {
+            inicioPanel.refrescar();
+        }
+        if (CARD_DOCENTES.equals(nombreCard)) {
+            docentePanel.refrescar();
+        }
+        if (CARD_ASIGNATURAS.equals(nombreCard)) {
+            asignaturaPanel.refrescar();
+        }
+        if (CARD_AULAS.equals(nombreCard)) {
+            aulaPanel.refrescar();
+        }
         if (CARD_USUARIOS.equals(nombreCard)) {
             usuarioPanel.refrescar();
         }
@@ -285,6 +301,14 @@ public class MainFrame extends JFrame {
             perfilPanel.refrescar();
         }
         cardLayout.show(panelContenido, nombreCard);
+    }
+
+    private void refrescarTrasCambioDocentes() {
+        usuarioPanel.refrescar();
+        if (inicioPanel != null) {
+            inicioPanel.refrescar();
+        }
+        horarioPanel.refrescar();
     }
 
     private String textoEncabezadoUsuario() {

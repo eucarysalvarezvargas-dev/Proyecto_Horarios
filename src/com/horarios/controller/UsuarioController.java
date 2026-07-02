@@ -64,6 +64,16 @@ public class UsuarioController extends ControladorBase {
         this.docenteController = docenteController;
     }
 
+    public Usuario registrarSinVinculo(Usuario usuario) {
+        boolean prev = omitirVinculo;
+        omitirVinculo = true;
+        try {
+            return registrar(usuario);
+        } finally {
+            omitirVinculo = prev;
+        }
+    }
+
     public boolean actualizarSinVinculo(Usuario usuario) {
         boolean prev = omitirVinculo;
         omitirVinculo = true;
@@ -125,6 +135,9 @@ public class UsuarioController extends ControladorBase {
     }
 
     private boolean validarReglasVinculoAlta(Usuario usuario) {
+        if (omitirVinculo) {
+            return true;
+        }
         if (esRolDocente(usuario.getRol())) {
             setUltimoError("El rol DOCENTE no se asigna desde Usuarios.\n\nUse el módulo Docentes.");
             return false;

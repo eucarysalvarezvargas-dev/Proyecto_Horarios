@@ -203,6 +203,10 @@ public class AulaPanel extends JPanel {
         TablaUtil.aplicarAnchosContenidoYRellenarPadre(scrollTabla, tabla, 14, 52, 520, new int[]{1});
     }
 
+    public void refrescar() {
+        refrescarTabla();
+    }
+
     private class AulaTableModel extends AbstractTableModel {
 
         private final String[] columnas = new String[]{"Código", "Descripción", "Capacidad"};

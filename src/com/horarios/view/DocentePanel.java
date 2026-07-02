@@ -38,6 +38,7 @@ public class DocentePanel extends JPanel {
     private JScrollPane scrollTabla;
     private TableRowSorter<DocenteTableModel> sorter;
     private JTextField txtFiltro;
+    private Runnable onDatosCambiados;
 
     public DocentePanel(DocenteController controller) {
         this(controller, null);
@@ -183,7 +184,7 @@ public class DocentePanel extends JPanel {
         }
         Mensajes.info("Docente registrado correctamente.\n\nCédula: " + creado.getCedula()
                 + "\n\nAcceso creado:\nUsername: " + creado.getCedula() + "\nClave inicial: " + creado.getCedula() + "\nRol: DOCENTE");
-        refrescarTabla();
+        notificarCambioDatos();
     }
 
     private Docente docenteSeleccionado() {
@@ -218,7 +219,7 @@ public class DocentePanel extends JPanel {
         boolean ok = controller.actualizar(actualizado);
         if (ok) {
             Mensajes.info("Docente actualizado correctamente.");
-            refrescarTabla();
+            notificarCambioDatos();
         } else {
             Mensajes.error("No se pudo modificar el docente.\n\nVerifique que la cédula no esté duplicada.");
         }
@@ -260,14 +261,36 @@ public class DocentePanel extends JPanel {
             boolean ok = controller.eliminarLogico(existente.getIdDocente());
             if (ok) {
                 Mensajes.info("Docente eliminado.");
-                refrescarTabla();
+                notificarCambioDatos();
             } else {
                 Mensajes.error("No se pudo eliminar el docente.");
             }
         }
     }
 
+    public void setOnDatosCambiados(Runnable onDatosCambiados) {
+        this.onDatosCambiados = onDatosCambiados;
+    }
+
+    public void refrescar() {
+        refrescarTabla(false);
+    }
+
+    private void notificarCambioDatos() {
+        refrescarTabla(true);
+        if (onDatosCambiados != null) {
+            onDatosCambiados.run();
+        }
+    }
+
     private void refrescarTabla() {
+        refrescarTabla(false);
+    }
+
+    private void refrescarTabla(boolean limpiarFiltro) {
+        if (limpiarFiltro && txtFiltro != null) {
+            txtFiltro.setText("");
+        }
         tableModel.setDatos(controller.listarActivos());
         aplicarFiltro();
         TablaUtil.aplicarAnchosContenidoYRellenarPadre(scrollTabla, tabla, 14, 52, 560, new int[]{1, 2, 3});
