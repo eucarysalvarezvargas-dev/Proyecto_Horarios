@@ -344,7 +344,7 @@ Estos archivos no se suben al repositorio. Solicítelos al coordinador del proye
 | Cesar Castañeda | DEV                | 29587885 |
 | Cesar Castañeda | DEV                | 29587885 |
 | Cesar Castañeda | DEV                | 29587885 |
-| Cesar Castañeda | DEV                | 29587885 |
+| Eucarys Alvarez | DEV                | 30396089|
 
 ### Poner nombres muchachos!
 
